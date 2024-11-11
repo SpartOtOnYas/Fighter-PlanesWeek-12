@@ -12,14 +12,20 @@ public class GameManager : MonoBehaviour
     public GameObject coinPrefab;   
     public AudioClip coinPickupSound;  
     public TextMeshProUGUI scoreText;   
+    public TextMeshProUGUI livesText;
+    private Player playerScript;
 
     private int score;
-    private CoinSpawner coinSpawner;  
+    private CoinSpawner coinSpawner;
+
 
     void Start()
     {
         
-        Instantiate(player, transform.position, Quaternion.identity);
+        player = Instantiate(player, transform.position, Quaternion.identity);
+
+        playerScript = player.GetComponent<Player>();
+        Debug.Log(playerScript.lives);
 
         
         score = 0;
@@ -35,11 +41,20 @@ public class GameManager : MonoBehaviour
         coinSpawner = gameObject.AddComponent<CoinSpawner>();  
         coinSpawner.coinPrefab = coinPrefab; 
         coinSpawner.coinPickupSound = coinPickupSound;  
-        coinSpawner.StartCoinSpawning(); 
+        coinSpawner.StartCoinSpawning();
+
+        
     }
 
     void Update()
     {
+        if(player !=null){
+            livesText.text = "Lives: " + playerScript.lives;
+        }
+        else if (player == null)
+        {
+            livesText.text = "Lives: 0";
+        }
         
     }
 

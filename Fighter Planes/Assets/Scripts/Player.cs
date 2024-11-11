@@ -10,7 +10,7 @@ public class Player : MonoBehaviour
     private float horizontalScreenSize = 11.5f;
     private float verticalScreenSize = 7.5f;
     private float speed;
-    private int lives;
+    public int lives;
 
     public GameObject bullet;
 
@@ -56,6 +56,7 @@ public class Player : MonoBehaviour
         lives--;
         //lives -= 1;
         //lives = lives - 1;
+        Debug.Log(lives);
         if (lives == 0)
         {
             Destroy(this.gameObject);
